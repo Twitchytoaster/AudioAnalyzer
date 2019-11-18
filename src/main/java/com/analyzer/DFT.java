@@ -6,6 +6,7 @@ import java.util.List;
 public class DFT {
 
     static List<Float> process(double results[], float sampleRate, int numSamples, int sigma) {
+
         double average = 0;
         for (int i = 0; i < results.length; i++) {
             average += results[i];
