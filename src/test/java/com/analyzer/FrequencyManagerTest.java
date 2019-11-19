@@ -20,6 +20,7 @@ public class FrequencyManagerTest {
 
     @Test
     public void convertFrequenciesTest() {
-        frequencyManager.convertFrequencies(frequencyList, 1.0);
+        List<NoteTimeData> noteTimeData = frequencyManager.convertFrequencies(frequencyList, 1.0);
+        System.out.println();
     }
 }

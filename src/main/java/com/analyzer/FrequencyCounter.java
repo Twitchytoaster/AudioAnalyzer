@@ -10,7 +10,7 @@ public class FrequencyCounter {
     private int endIndex;
 
     //average frequency from similar frequencies
-    private float frequency;
+    private Float frequency;
 
     //start time of current frequency in millis
     private double startTime;
@@ -58,11 +58,27 @@ public class FrequencyCounter {
         this.endIndex = endIndex;
     }
 
-    public float getFrequency() {
-        return frequency;
+    public double getStartTime() {
+        return startTime;
     }
 
-    public void setFrequency(float frequency) {
+    public void setStartTime(double startTime) {
+        this.startTime = startTime;
+    }
+
+    public double getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(double endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setFrequency(Float frequency) {
         this.frequency = frequency;
+    }
+
+    public Float getFrequency() {
+        return frequency;
     }
 }

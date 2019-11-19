@@ -3,17 +3,19 @@ package com.analyzer;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class FrequencyManager {
-
-    private static final int FIRST_FREQUENCY_INDEX = 0;
 
     public List<NoteTimeData> convertFrequencies(List<Float> frequencies, double soundDuration) {
         double singleFrequencyTimeLength = getSingleFrequencyTimeLength(soundDuration, frequencies.size());
         List<FrequencyCounter> frequencyCounters = countSimilarFrequencies(frequencies, singleFrequencyTimeLength);
-        return null;
+        return gatherNoteInfo(frequencyCounters);
     }
 
+    /**
+     * @param sftl - Single Frequency Time Length = Song Duration / all found frequencies
+     */
     public List<FrequencyCounter> countSimilarFrequencies(List<Float> frequencies, double sftl) {
         List<FrequencyCounter> counters = new LinkedList<>();
         List<Integer> indices = new LinkedList<>();
@@ -57,13 +59,14 @@ public class FrequencyManager {
         return counters;
     }
 
-    /**
-     * @param sftl - Single Frequency Time Length = Song Duration / all found frequencies
-     */
-    public List<NoteTimeData> gatherNoteInfo(List<FrequencyCounter> data, double sftl) {
 
-
-        return null;
+    private List<NoteTimeData> gatherNoteInfo(List<FrequencyCounter> data) {
+        return data.stream()
+                .map(e -> new NoteTimeData(e.getFrequency().toString(),
+                        e.getStartTime(),
+                        e.getEndTime() - e.getStartTime(),
+                        e.getEndTime()))
+                .collect(Collectors.toList());
     }
 
     private float getAverageFrequency(List<Float> frequencies) {
