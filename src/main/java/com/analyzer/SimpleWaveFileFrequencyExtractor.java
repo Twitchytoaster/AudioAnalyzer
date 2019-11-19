@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class WavRecognizer {
+public class SimpleWaveFileFrequencyExtractor {
     static String[] notes = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
 
     public List<Float> getFrequencies(File fileIn) throws IOException, UnsupportedAudioFileException {
@@ -41,14 +41,6 @@ public class WavRecognizer {
 
         List<Float> found = DFT.process(results, ais.getFormat().getSampleRate(), resultC.length, 7);
         return found;
-/*        HashMap<String, Float> keys = new HashMap<String, Float>();
-        System.out.println("Found:" + found);
-        for (float freq : found) {
-            keys.put(closestKey(freq), freq);
-        }
-        for (String note : keys.keySet()) {
-            System.out.println("Found: " + note + " @ freq=" + keys.get(note));
-        }*/
     }
 
     public static String closestKey(double freq) {

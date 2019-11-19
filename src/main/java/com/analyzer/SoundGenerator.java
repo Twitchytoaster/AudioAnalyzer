@@ -6,42 +6,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class SoundGenerator {
-    public static void main(String[] args) throws Exception {
-        float sampleRate = 44100;
-        double frequency = 261;
-        double a = 0.5;
-        double twoPiF = 2 * Math.PI * frequency;
-
-        double[] buffer = new double[44100];
-        for (int sample = 0; sample < buffer.length; sample++) {
-            double time = sample / sampleRate;
-            buffer[sample] = a * Math.sin(twoPiF * time);
-        }
-
-        final byte[] byteBuffer = new byte[buffer.length];
-        int idx = 0;
-        for (int i = 0; i < byteBuffer.length; ) {
-            int x = (int) (buffer[idx++] * 127);
-            byteBuffer[i++] = (byte) x;
-        }
-
-        boolean bigEndian = false;
-        boolean signed = true;
-        int bits = 8;
-        int channels = 1;
-        AudioFormat format = new AudioFormat(sampleRate, bits, channels, signed, bigEndian);
-
-        DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
-        SourceDataLine line = (SourceDataLine) AudioSystem.getLine(info);
-        line.open(format);
-        line.start();
-        long now = System.currentTimeMillis();
-        line.write(byteBuffer, 0, byteBuffer.length);
-        line.close();
-        long total = System.currentTimeMillis() - now;
-
-        //createWAV(byteBuffer);
-    }
 
     public static byte[] generateSound(double sampleRate, double frequency, double amplitude) {
         double twoPiF = 2 * Math.PI * frequency;
